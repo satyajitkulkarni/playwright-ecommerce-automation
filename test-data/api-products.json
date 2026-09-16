@@ -1,0 +1,16 @@
+{
+    "createProduct": {
+        "title": "Playwright Automation Product",
+        "body": "Created by API automation",
+        "userId": 1
+    },
+    "updateProduct": {
+        "id": 1,
+        "title": "Updated Automation Product",
+        "body": "Updated using API automation",
+        "userId": 1
+    },
+    "patchProduct": {
+        "title": "Partially Updated Product"
+    }
+}

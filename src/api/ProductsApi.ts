@@ -1,6 +1,6 @@
 import { APIRequestContext } from '@playwright/test';
 import { ApiClient } from './ApiClient';
-import { Product, ProductResponse, } from '../types/apiTypes';
+import { Product } from '../types/apiTypes';
 
 export class ProductsApi extends ApiClient {
 
@@ -16,7 +16,7 @@ export class ProductsApi extends ApiClient {
         return await this.get(`/posts/${id}`);
     }
 
-    async createProduct(data: unknown) {
+    async createProduct(data: Product) {
         return await this.post('/posts', data);
     }
 
@@ -30,7 +30,7 @@ export class ProductsApi extends ApiClient {
     async deleteProduct(id: number) {
         return await this.delete(`/posts/${id}`);
     }
-    
+
     async patchProduct(id: number, data: Partial<Product>) {
         return await this.patch(`/posts/${id}`, data);
     }

@@ -1,4 +1,4 @@
-import { APIRequestContext, expect, } from '@playwright/test';
+import { APIRequestContext, expect } from '@playwright/test';
 
 export class ApiClient {
     protected readonly request: APIRequestContext;
@@ -55,10 +55,17 @@ export class ApiClient {
         );
     }
 
-    async expectSuccess(response: {
-        ok(): boolean;
-        status(): number;
-    }): Promise<void> {
+    async expectSuccess(
+        response: {
+            ok(): boolean;
+            status(): number;
+        },
+        expectedStatus?: number,
+    ): Promise<void> {
         expect(response.ok()).toBeTruthy();
+
+        if (expectedStatus !== undefined) {
+            expect(response.status()).toBe(expectedStatus);
+        }
     }
 }

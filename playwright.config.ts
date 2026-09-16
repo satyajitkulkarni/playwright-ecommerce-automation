@@ -5,6 +5,20 @@ dotenv.config({
   path: 'config/.env.qa',
 })
 
+if (process.env.CI) {
+  process.env.BASE_URL =
+    process.env.BASE_URL ||
+    'https://www.saucedemo.com';
+
+  process.env.API_BASE_URL =
+    process.env.API_BASE_URL ||
+    'https://jsonplaceholder.typicode.com';
+
+  process.env.ENVIRONMENT =
+    process.env.ENVIRONMENT ||
+    'qa';
+}
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -36,6 +50,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */

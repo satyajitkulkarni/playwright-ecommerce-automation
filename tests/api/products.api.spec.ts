@@ -1,6 +1,6 @@
 import { test, expect, } from '@playwright/test';
 import { ProductsApi } from '../../src/api/ProductsApi';
-import { Product, } from '../../src/types/apiTypes';
+import { apiTestData } from '../../src/utils/apiTestData';
 
 test.describe('Products API', () => {
 
@@ -14,8 +14,7 @@ test.describe('Products API', () => {
             const response =
                 await productsApi.getProducts();
 
-            expect(response.ok()).toBeTruthy();
-            expect(response.status()).toBe(200);
+            await productsApi.expectSuccess(response, 200);
 
             const products = await response.json();
 
@@ -31,16 +30,12 @@ test.describe('Products API', () => {
 
             const productsApi = new ProductsApi(request);
 
-            const product: Product = {
-                title: 'Playwright Automation Product',
-                body: 'Created by API automation',
-                userId: 1,
-            };
+            const product = apiTestData.createProduct;
 
             const response =
                 await productsApi.createProduct(product);
 
-            expect(response.status()).toBe(201);
+            await productsApi.expectSuccess(response, 201);
 
             const responseBody = await response.json();
 
@@ -57,12 +52,7 @@ test.describe('Products API', () => {
 
             const productsApi = new ProductsApi(request);
 
-            const updatedProduct: Product = {
-                id: 1,
-                title: 'Updated Automation Product',
-                body: 'Updated using API automation',
-                userId: 1,
-            };
+            const updatedProduct = apiTestData.updateProduct;
 
             const response =
                 await productsApi.updateProduct(
@@ -70,7 +60,7 @@ test.describe('Products API', () => {
                     updatedProduct,
                 );
 
-            expect(response.status()).toBe(200);
+            await productsApi.expectSuccess(response, 200);
 
             const responseBody = await response.json();
 
@@ -92,7 +82,7 @@ test.describe('Products API', () => {
             const response =
                 await productsApi.deleteProduct(1);
 
-            expect(response.status()).toBe(200);
+            await productsApi.expectSuccess(response, 200);
         });
 
     test('should partially update a product',
@@ -101,13 +91,11 @@ test.describe('Products API', () => {
         }, async ({ request }) => {
             const productsApi = new ProductsApi(request);
 
-            const patchData = {
-                title: 'Partially Updated Product',
-            };
+            const patchData = apiTestData.patchProduct;
 
             const response = await productsApi.patchProduct(1, patchData);
 
-            expect(response.status()).toBe(200);
+            await productsApi.expectSuccess(response, 200);
 
             const responseBody = await response.json();
 
