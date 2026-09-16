@@ -1,0 +1,10 @@
+{
+    "validCustomer": {
+        "firstName": "Satyajit",
+        "lastName": "Kulkarni",
+        "postalCode": "411041"
+    },
+    "product": {
+        "name": "Sauce Labs Backpack"
+    }
+}
