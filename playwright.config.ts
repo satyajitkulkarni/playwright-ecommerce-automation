@@ -63,6 +63,7 @@ export default defineConfig({
     {
       name: 'chromium',
       testIgnore: '**/api/**',
+      dependencies: ['setup'],
       use: {
         ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/user.json',
@@ -72,6 +73,7 @@ export default defineConfig({
     {
       name: 'firefox',
       testIgnore: '**/api/**',
+      dependencies: ['setup'],
       use: {
         ...devices['Desktop Firefox'],
         storageState: 'playwright/.auth/user.json',
@@ -81,6 +83,7 @@ export default defineConfig({
     {
       name: 'webkit',
       testIgnore: '**/api/**',
+      dependencies: ['setup'],
       use: {
         ...devices['Desktop Safari'],
         storageState: 'playwright/.auth/user.json',
